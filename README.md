@@ -59,9 +59,4 @@ Para habilitar o controle por IA externa:
 
 ---
 
-## 🚀 Próximos Passos
-- [ ] Implementar sistema de níveis dinâmicos.
-- [ ] Adicionar obstáculos móveis.
-- [ ] Ranking global via API.
-
 Feito com 💡 para a comunidade de desenvolvedores de IA.
