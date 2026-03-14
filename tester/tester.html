@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tester - Olimpiadas da IA</title>
+    <link rel="stylesheet" href="tester.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <div class="title-area">
+                <h1>Cliente Testador <span>iA</span></h1>
+                <button id="mute-btn" class="icon-btn" title="Alternar Som">🔊</button>
+            </div>
+            <div class="stats-bar">
+                <div class="stat-item">Nível: <span id="stat-level">-</span></div>
+                <div class="stat-item">Pontos: <span id="stat-score">-</span></div>
+                <div id="mcp-status" class="stat-item">MCP: <span class="mcp-indicator">offline</span></div>
+                <div id="connection-status" class="disconnected">Jogo Desconectado</div>
+            </div>
+        </header>
+
+        <div class="main-dashboard-layout">
+            <!-- Coluna 1: Configuração -->
+            <aside class="panel config-panel">
+                <h3><i class="icon">⚙️</i> Configurações</h3>
+                <div class="input-group">
+                    <label>OpenRouter API Key</label>
+                    <input type="password" id="api-key" placeholder="Chave de API (Não salva)...">
+                </div>
+                <div class="input-group">
+                    <label>Modelo LLM</label>
+                    <div class="searchable-dropdown">
+                        <input type="text" id="model-search" placeholder="Pesquisar modelo...">
+                        <ul id="model-list" class="dropdown-list"></ul>
+                    </div>
+                    <div id="model-info" class="model-pricing-info"></div>
+                </div>
+                <div class="input-group">
+                    <label>Modo de Visão</label>
+                    <select id="vision-mode">
+                        <option value="text">Texto (ASCII Map)</option>
+                        <option value="image">Imagem (Vision)</option>
+                    </select>
+                </div>
+                <div class="actions">
+                    <button id="step-btn" class="btn-primary">🏃 Passo Único</button>
+                    <button id="auto-btn" class="btn-secondary">🤖 Auto-Play</button>
+                    <div class="level-jump-group">
+                        <select id="level-select" class="dropdown-select"></select>
+                        <button id="goto-level-btn" class="btn-secondary">Ir para fase</button>
+                    </div>
+                    <button id="reset-game-btn" class="btn-secondary" style="border-color: var(--error); color: var(--error);">💥 Reiniciar Tudo</button>
+                </div>
+            </aside>
+
+            <!-- Coluna 2: Visão -->
+            <section class="panel vision-panel">
+                <h3><i class="icon">👁️</i> Observação</h3>
+                <div class="obs-container">
+                    <div class="obs-view">
+                        <label>Mapa ASCII</label>
+                        <pre id="map-text" class="map-render"></pre>
+                    </div>
+                    <div class="obs-view">
+                        <label>Captura Real</label>
+                        <div class="screenshot-wrap">
+                            <img id="map-image" src="" alt="Aguardando conexão...">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Coluna 3: Logs e Cérebro -->
+            <aside class="panel log-panel">
+                <h3><i class="icon">📊</i> Painel de Operações</h3>
+                <div class="log-section">
+                    <label>Histórico de Comandos</label>
+                    <div class="table-scroll">
+                        <table id="command-log">
+                            <thead>
+                                <tr>
+                                    <th>Hora</th>
+                                    <th>Ação</th>
+                                    <th>Resultado</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="console-section">
+                    <label>Instruções Atuais (System Prompt)</label>
+                    <div id="live-prompt" class="prompt-display">Aguardando comando...</div>
+                </div>
+                <div class="console-section">
+                    <label>Brain Console</label>
+                    <div id="brain-console" class="console-output">Iniciando sistema...</div>
+                </div>
+            </aside>
+        </div>
+    </div>
+    <script src="../maps.js"></script>
+    <script src="tester.js"></script>
+</body>
+</html>

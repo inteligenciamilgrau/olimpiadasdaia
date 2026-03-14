@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olimpíadas da IA Master</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>Olimpíadas da IA <span>Master</span></h1>
+            <div class="stats">
+                <div class="stat-card">
+                    <label>Fase</label>
+                    <span id="level-name">Simples</span>
+                </div>
+                <div class="stat-card">
+                    <label>Tempo</label>
+                    <span id="timer">0.0s</span>
+                </div>
+                <div class="stat-card">
+                    <label>Score Total</label>
+                    <span id="score">0</span>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="game-flex-container">
+                <div class="canvas-container">
+                    <canvas id="gameCanvas"></canvas>
+                    <div id="overlay" class="visible">
+                        <div class="overlay-content">
+                            <h2 id="overlay-title">Pronto para o Desafio?</h2>
+                            <p id="overlay-msg">Colete os itens para avançar!</p>
+                            <button id="start-btn">INICIAR JOGO</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="leaderboard-panel">
+                    <h3>🏆 Recordes (Tempo)</h3>
+                    <div id="records-list">
+                        <!-- Gerado via JS -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="controls-info">
+                <p>Use as <strong>Setas</strong> para mover o jogador.</p>
+                <small>Interface Programável Ativa (console.game)</small>
+            </div>
+        </footer>
+    </div>
+    <script src="../maps.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
