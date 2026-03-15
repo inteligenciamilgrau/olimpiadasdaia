@@ -26,6 +26,15 @@ O modo mais avançado para integração com agentes agentivos (como Antigravity,
 - **Como funciona**: O jogo expõe um servidor MCP que permite que a IA "enxergue" o mapa e "mova" o personagem como se fosse uma ferramenta nativa do modelo.
 - **Shared Bridge**: O servidor suporta múltiplas conexões simultâneas (Mestre/Escravo), permitindo que você debuge o jogo com vários agentes ao mesmo tempo sem conflitos de porta.
 
+### 🗺️ 4. Editor de Mapas (Novo!)
+Crie e edite fases de forma visual e intuitiva abrindo `editor/index.html`.
+  - **Funcionalidades**:
+  - **Pintura Visual**: Selecione blocos (Muralhas, Árvores, Player, Recompensa) e desenhe direto no grid.
+  - **Seleção e Movimentação**: Ferramenta de seleção para mover múltiplos objetos de uma vez.
+  - **Atalhos**: Use **Ctrl + Clique** para selecionar/desselecionar blocos individuais.
+  - **Exportação Real-time**: Gera o código pronto para ser copiado para o arquivo `maps.js`.
+  - **Assets Novos**: Suporte completo ao novo asset de Árvore (`T`), que serve como obstáculo dinâmico.
+
 ---
 
 ## 🛠️ Configuração do Servidor MCP
@@ -54,6 +63,7 @@ Continue executando movimentos até vencer todas as fases do jogo!
 ## 🏗️ Estrutura do Projeto
 
 - `game/`: O núcleo do jogo (HTML, CSS e Lógica).
+- `editor/`: Ferramenta visual de criação de fases.
 - `tester/`: Dashboard de testes e integração direta com APIs.
 - `server/`: Ponte de comunicação via protocolo MCP.
 - `maps.js`: Arquivo compartilhado de fases (para novos mapas da comunidade!).
