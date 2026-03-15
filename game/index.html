@@ -16,7 +16,12 @@
             <div class="stats">
                 <div class="stat-card">
                     <label>Fase</label>
-                    <span id="level-name">Simples</span>
+                    <div class="level-selector-wrapper">
+                        <span id="level-name">Simples</span>
+                        <select id="level-jump-select">
+                            <option value="" disabled selected>Pular para...</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="stat-card">
                     <label>Tempo</label>
@@ -43,7 +48,7 @@
                 </div>
 
                 <div class="leaderboard-panel">
-                    <h3>🏆 Recordes (Tempo)</h3>
+                    <h3>🏆 Recordes</h3>
                     <div id="records-list">
                         <!-- Gerado via JS -->
                     </div>

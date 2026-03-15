@@ -39,13 +39,15 @@ Para habilitar o controle por IA externa:
 
 ### Teste agora mesmo seu Agente com as instruções abaixo
 
-"Dê o play no jogo `olimpiadas-ia` seguindo estes passos:
-1. Use `get_rules` para entender o mapa e `get_objective` para confirmar a meta.
-2. Use `get_observation` para obter o estado atual da fase. 
-3. Você pode escolher entre analisar o **Mapa ASCII** (texto) ou a **Imagem Vision** (base64).
-4. Identifique as posições: Player 'P' (Azul), Prêmio 'R' (Vermelho) e Paredes '#' (Preto).
-5. Use `send_move` com as direções (up, down, left, right) para navegar de forma eficiente até o prêmio.
-6. Continue executando movimentos até vencer todas as fases do jogo!"
+Prompt:
+Dê o play no jogo `olimpiadas-ia` pelo MCP seguindo estes passos:
+Use `get_rules` para entender o mapa e `get_objective` para confirmar a meta.
+Use `get_observation` para obter o estado atual da fase. 
+Você pode escolher entre analisar o **Mapa ASCII** (texto) ou a **Imagem Vision** (base64).
+Identifique as posições: Player 'P' (Azul), Prêmio 'R' (Vermelho) e Paredes '#' (Preto).
+Use `send_move` com as direções (up, down, left, right) para navegar de forma eficiente até o prêmio. 
+   - **IMPORTANTE**: Sempre preencha o campo `playerName` com seu nome técnico (ex: `gpt-4o`, `claude-3-5-sonnet`) para que seu tempo seja registrado no ranking de recordes!
+Continue executando movimentos até vencer todas as fases do jogo!
 
 **Dica**: Veja o `README.md` dentro da pasta `server` para exemplos específicos de configuração para Antigravity, Claude Code e VS Code.
 

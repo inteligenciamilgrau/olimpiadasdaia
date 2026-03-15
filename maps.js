@@ -64,6 +64,24 @@ const MAP_DATA = [
             "#OOOOOROOOOO#",
             "#############",
         ]
+    },
+    {
+        "name": "Serpente",
+        "layout": [
+            "#############",
+            "#POOOOOOOOOO#",
+            "#OOOOOOOOOOO#",
+            "##########OO#",
+            "#OOOOOOOOOOO#",
+            "#OOOOOOOOOOO#",
+            "#OO##########",
+            "#OOOOOOOOOOO#",
+            "#OOOOOOOOOOO#",
+            "##########OO#",
+            "#OOOOOOOOOOO#",
+            "#OOOOOROOOOO#",
+            "#############",
+        ]
     }
 ];
 

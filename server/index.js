@@ -165,8 +165,12 @@ class GameMcpServer {
                                 enum: ["up", "down", "left", "right"],
                                 description: "The direction to move the player.",
                             },
+                            playerName: {
+                                type: "string",
+                                description: "Your AI model name (e.g., 'gpt-4o', 'claude-3-5-sonnet') to be used in the records.",
+                            }
                         },
-                        required: ["direction"],
+                        required: ["direction", "playerName"],
                     },
                 },
                 {
@@ -177,11 +181,19 @@ class GameMcpServer {
                         properties: {
                             command: {
                                 type: "string",
-                                enum: ["start", "reset_level"],
-                                description: "The command to execute. Use 'start' to begin the game or play again.",
+                                enum: ["start", "reset_level", "clear_records", "goto_level"],
+                                description: "The command to execute. Use 'start' to begin, 'reset_level' to restart current level, 'clear_records' to wipe the leaderboard, or 'goto_level' to jump to a specific level (requires levelIdx).",
                             },
+                            levelIdx: {
+                                type: "number",
+                                description: "The index of the level to jump to (0-based). Only used with 'goto_level'.",
+                            },
+                            playerName: {
+                                type: "string",
+                                description: "Your AI model name to identify you in the game session.",
+                            }
                         },
-                        required: ["command"],
+                        required: ["command", "playerName"],
                     },
                 },
             ],
@@ -208,7 +220,7 @@ class GameMcpServer {
                         : "STATUS: Menu Principal / Tela de Vitória (O jogo ainda não começou ou terminou)";
                     
                     const obs = [
-                        { type: "text", text: `${statusText}\n\nMapa ASCII:\n${lastGameState.map}` }
+                        { type: "text", text: `${statusText}\n\nMapa ASCII:\n${lastGameState.map}\n\nIMPORTANTE: Ao enviar sua jogada em 'send_move', identifique-se obrigatoriamente usando seu nome técnico de modelo (ex: 'claude-3-5-sonnet', 'gpt-4o', etc) no campo 'playerName'.` }
                     ];
                     
                     if (lastGameState.image) {
@@ -227,14 +239,14 @@ class GameMcpServer {
                     }
                     return { content: obs };
 
-                case "send_move":
-                    const { direction } = request.params.arguments;
+                case "send_move": {
+                    const { direction, playerName } = request.params.arguments;
                     
                     try {
                         const moveCmd = JSON.stringify({ 
                             type: 'move', 
                             direction, 
-                            playerName: "Agente MCP",
+                            playerName: playerName || "IA Misteriosa",
                             source: 'ws',
                             seq: Date.now() 
                         });
@@ -247,25 +259,29 @@ class GameMcpServer {
                     } catch (e) {
                         throw new McpError(ErrorCode.InternalError, `Erro ao enviar comando para o bridge: ${e.message}`);
                     }
+                }
 
-                case "send_command":
-                    const { command } = request.params.arguments;
+                case "send_command": {
+                    const { command, playerName, levelIdx } = request.params.arguments;
                     try {
                         const cmd = JSON.stringify({ 
-                            type: command, // 'start' ou 'reset_level'
-                            playerName: "Agente MCP",
+                            type: command, 
+                            playerName: playerName || "IA Misteriosa",
+                            levelIdx: levelIdx,
                             source: 'ws',
                             seq: Date.now() 
                         });
                         
                         sendBridgeMessage(cmd);
 
+                        const msgSuffix = command === 'goto_level' ? ` (Fase ${levelIdx})` : '';
                         return {
-                            content: [{ type: "text", text: `Comando administrativo '${command}' enviado com sucesso.` }],
+                            content: [{ type: "text", text: `Comando administrativo '${command}'${msgSuffix} enviado com sucesso.` }],
                         };
                     } catch (e) {
                         throw new McpError(ErrorCode.InternalError, `Erro ao enviar comando administrativo: ${e.message}`);
                     }
+                }
 
                 default:
                     throw new McpError(ErrorCode.MethodNotFound, `Ferramenta desconhecida: ${request.params.name}`);

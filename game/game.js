@@ -12,6 +12,7 @@ const overlay = document.getElementById('overlay');
 const startBtn = document.getElementById('start-btn');
 const overlayTitle = document.getElementById('overlay-title');
 const overlayMsg = document.getElementById('overlay-msg');
+const levelJumpSelect = document.getElementById('level-jump-select');
 
 // Assets
 const imgWall = new Image(); imgWall.src = 'assets/muralha.png';
@@ -64,6 +65,11 @@ const processCommand = (data) => {
         window.game.active = true;
         overlay.classList.remove('visible');
         window.game.loadLevel(levelIdx);
+    } else if (type === 'clear_records') {
+        localStorage.removeItem('game_records');
+        window.game.records = {};
+        window.game.updateRecordsUI();
+        console.log("[Game] Recordes limpos com sucesso!");
     } else if (type === 'request_update') {
         window.game.broadcast();
     }
@@ -140,6 +146,7 @@ class Game {
         this.initEventListeners();
         this.render();
         this.updateRecordsUI();
+        this.populateLevelSelector();
 
         // Load level 0 but keep inactive so it shows in the tester
         this.loadLevel(0);
@@ -197,6 +204,25 @@ class Game {
         });
 
         startBtn.addEventListener('click', () => this.start());
+
+        levelJumpSelect.addEventListener('change', (e) => {
+            const idx = parseInt(e.target.value);
+            if (!isNaN(idx)) {
+                processCommand({ type: 'goto_level', levelIdx: idx });
+                // Reset select for next time
+                e.target.value = "";
+            }
+        });
+    }
+
+    populateLevelSelector() {
+        if (!levelJumpSelect) return;
+        MAP_DATA.forEach((map, idx) => {
+            const opt = document.createElement('option');
+            opt.value = idx;
+            opt.textContent = `${idx + 1}. ${map.name}`;
+            levelJumpSelect.appendChild(opt);
+        });
     }
 
     start() {
@@ -284,6 +310,8 @@ class Game {
     }
 
     recordTime() {
+        if (this.currentPlayerName === "Jogador Local") return;
+        
         const timeTaken = parseFloat(((Date.now() - this.startTime) / 1000).toFixed(2));
         const levelName = MAP_DATA[this.levelIdx].name;
 
