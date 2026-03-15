@@ -210,7 +210,7 @@ class GameMcpServer {
                     return {
                         content: [{ 
                             type: "text", 
-                            text: "REGRAS:\n- Movimentos: up, down, left, right.\n- Você é o 'P' (AZUL).\n- O prêmio é o 'R' (VERMELHO).\n- Paredes são '#' (PRETO) e bloqueiam movimento." 
+                            text: "REGRAS:\n- Movimentos: up, down, left, right.\n- Você é o 'P' (AZUL).\n- O prêmio é o 'R' (VERMELHO).\n- Paredes são '#' (PRETO) e Árvores são 'T' (MARROM). Ambos bloqueiam o movimento." 
                         }],
                     };
 

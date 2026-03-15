@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor de Mapas - Olímpiadas da iA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>MAP EDITOR v1.0</h1>
+        <div style="display: flex; gap: 10px;">
+            <button class="btn btn-secondary" id="btn-export">Exportar Código</button>
+            <button class="btn" id="btn-save">Salvar no Arquivo</button>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="control-group">
+                <h2>Seletor de Mapa</h2>
+                <select id="map-select">
+                    <option value="-1">-- Novo Mapa --</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <h2>Configurações</h2>
+                <label style="font-size: 0.8rem; margin-bottom: 5px; display: block;">Nome do Mapa</label>
+                <input type="text" id="map-name" placeholder="Nome do mapa...">
+                
+                <div style="height: 10px;"></div>
+                
+                <label style="font-size: 0.8rem; margin-bottom: 5px; display: block;">Tamanho (Grid)</label>
+                <div class="input-row">
+                    <input type="number" id="grid-width" value="11" min="3" max="50">
+                    <input type="number" id="grid-height" value="11" min="3" max="50">
+                </div>
+                <button class="btn btn-secondary" style="width: 100%;" id="btn-resize">Redimensionar</button>
+            </div>
+
+            <div class="control-group">
+                <h2>Paleta de Blocos</h2>
+                <div class="palette">
+                    <div class="tool active" data-type="O">
+                        <div style="width: 20px; height: 20px; border: 1px dashed #444;"></div>
+                        Vazio
+                    </div>
+                    <div class="tool" data-type="#">
+                        <img src="../game/assets/muralha.png" alt="Parede">
+                        Muralha
+                    </div>
+                    <div class="tool" data-type="T">
+                        <img src="../game/assets/arvore.png" alt="Árvore">
+                        Árvore
+                    </div>
+                    <div class="tool" data-type="P">
+                        <img src="../game/assets/player.png" alt="Player">
+                        Início
+                    </div>
+                    <div class="tool" data-type="R">
+                        <img src="../game/assets/recompensa.png" alt="Recompensa">
+                        Objetivo
+                    </div>
+                    <div class="tool" data-type="S">
+                        <div style="color: var(--primary); font-size: 1.2rem; display: flex; align-items: center; justify-content: center;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20"/></svg>
+                        </div>
+                        Mover
+                    </div>
+                    <div class="tool" data-type="D">
+                        <div style="color: #ff4d4d; font-size: 1.2rem; font-weight: bold;">×</div>
+                        Apagar
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <h2>Instruções</h2>
+                <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.4;">
+                    1. Selecione um bloco na paleta.<br>
+                    2. Clique ou arraste no grid para pintar.<br>
+                    3. Clique em Exportar para ver o código.<br>
+                    4. O botão Salvar enviará o comando para o Agente atualizar o arquivo local.
+                </p>
+            </div>
+        </aside>
+
+        <main class="editor-area">
+            <div id="canvas-container">
+                <div id="selection-marquee"></div>
+                <canvas id="editorCanvas"></canvas>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal de Exportação -->
+    <div class="modal" id="export-modal">
+        <div class="modal-content">
+            <h2>Código do Mapa</h2>
+            <p style="margin-bottom: 1rem; color: var(--text-muted);">Copie e substitua no arquivo <code style="color: var(--primary);">maps.js</code></p>
+            <pre id="code-output"></pre>
+            <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                <button class="btn btn-secondary" id="btn-copy">Copiar</button>
+                <button class="btn" id="btn-close-modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import maps.js -->
+    <script src="../maps.js"></script>
+    <script src="editor.js"></script>
+</body>
+</html>

@@ -12,7 +12,7 @@ const MAP_DATA = [
             "#OOOOOOOOO#",
             "#OOOOOOOOO#",
             "#OOOOOOOOO#",
-            "###########",
+            "###########"
         ]
     },
     {
@@ -28,7 +28,7 @@ const MAP_DATA = [
             "#OOOOOROOO#",
             "#OOOOOOOOO#",
             "#OOOOOOOOO#",
-            "###########",
+            "###########"
         ]
     },
     {
@@ -45,7 +45,7 @@ const MAP_DATA = [
             "########OO#",
             "#OOOOOOOOO#",
             "#ROOOOOOOO#",
-            "###########",
+            "###########"
         ]
     },
     {
@@ -62,7 +62,7 @@ const MAP_DATA = [
             "#OO#######OO#",
             "#OOOOOOOOOOO#",
             "#OOOOOROOOOO#",
-            "#############",
+            "#############"
         ]
     },
     {
@@ -80,7 +80,25 @@ const MAP_DATA = [
             "##########OO#",
             "#OOOOOOOOOOO#",
             "#OOOOOROOOOO#",
+            "#############"
+        ]
+    },
+    {
+        "name": "Confusão",
+        "layout": [
             "#############",
+            "#OOOOOOOOOOO#",
+            "#O#OOO#OO#OO#",
+            "#OO#OO#OO#OO#",
+            "#O#O##O##O#O#",
+            "#P#ROOO#OOOO#",
+            "#O#O##OO#OOO#",
+            "#OO#OOOOO##O#",
+            "#O#O#O##OOOO#",
+            "#OOOO#OO#OOO#",
+            "#O###OO#O#OO#",
+            "#OOOOOOOOOOO#",
+            "#############"
         ]
     }
 ];

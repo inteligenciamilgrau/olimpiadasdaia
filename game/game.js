@@ -18,6 +18,7 @@ const levelJumpSelect = document.getElementById('level-jump-select');
 const imgWall = new Image(); imgWall.src = 'assets/muralha.png';
 const imgPlayer = new Image(); imgPlayer.src = 'assets/player.png';
 const imgReward = new Image(); imgReward.src = 'assets/recompensa.png';
+const imgTree = new Image(); imgTree.src = 'assets/arvore.png';
 
 // --- Game API Communication ---
 const channel = new BroadcastChannel('game_api');
@@ -391,11 +392,14 @@ class Game {
     const map = this.grid; // Use this.grid as the map data
     const cellSize = bSize; // Use bSize as cellSize
 
-    // 2. Draw Walls (Black)
-    octx.fillStyle = '#000000';
+    // 2. Draw Walls (Black) and Trees (Brown/Sienna)
     for (let y = 0; y < map.length; y++) {
         for (let x = 0; x < map[y].length; x++) {
-            if (map[y][x] === '#') { // Check for '#' for walls
+            if (map[y][x] === '#') {
+                octx.fillStyle = '#000000';
+                octx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+            } else if (map[y][x] === 'T') {
+                octx.fillStyle = '#A0522D'; // Sienna/Brown for trees
                 octx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
             }
         }
@@ -433,6 +437,8 @@ class Game {
             for (let x = 0; x < this.grid[y].length; x++) {
                 if (this.grid[y][x] === '#') {
                     ctx.drawImage(imgWall, x * blockSize, y * blockSize, blockSize, blockSize);
+                } else if (this.grid[y][x] === 'T') {
+                    ctx.drawImage(imgTree, x * blockSize, y * blockSize, blockSize, blockSize);
                 } else {
                     ctx.strokeStyle = 'rgba(255,255,255,0.05)';
                     ctx.strokeRect(x * blockSize, y * blockSize, blockSize, blockSize);
